@@ -7,6 +7,7 @@ import * as Yup from 'yup';
 import { signInRequest } from '~/store/modules/auth/actions';
 
 import logo from '~/assets/logo.svg';
+import { Container, Content } from './styles';
 
 const schema = Yup.object().shape({
   email: Yup.string()
@@ -16,7 +17,6 @@ const schema = Yup.object().shape({
     .min(1, 'No mínimo 1 caracter')
     .required('A senha é obrigatória'),
 });
-// import { Container } from './styles';
 
 export default function SignIn() {
   const dispatch = useDispatch();
@@ -27,18 +27,22 @@ export default function SignIn() {
   }
 
   return (
-    <>
-      <img src={logo} alt="GoBarber" />
-      <Form schema={schema} onSubmit={handleSubmit}>
-        <Input name="email" type="email" placeholder="Seu email" />
-        <Input name="password" type="password" placeholder="Sua Senha" />
+    <Container>
+      <Content>
+        <img src={logo} alt="GoBarber" />
+        <Form schema={schema} onSubmit={handleSubmit}>
+          <Input name="email" type="email" placeholder="Seu email" />
+          <Input name="password" type="password" placeholder="Sua Senha" />
 
-        <button type="submit">{loading ? 'Carregando ...' : 'Acessar'}</button>
-        <div>
-          <Link to="/register">Criar conta</Link>
-          <Link to="/register">Esqueceu senha?</Link>
-        </div>
-      </Form>
-    </>
+          <button type="submit">
+            {loading ? 'Carregando ...' : 'Acessar'}
+          </button>
+          <div>
+            <Link to="/register">Criar conta</Link>
+            <Link to="/register">Esqueceu senha?</Link>
+          </div>
+        </Form>
+      </Content>
+    </Container>
   );
 }
